@@ -1,3 +1,4 @@
+# Uses python3
 # ask for n input: the number of integers
 n = int(input())
 
@@ -15,17 +16,24 @@ index = 0
 
 # search for the index of the max number in the list
 for i in range(1, n):
-    if a[i] > a[index1]:
-        index1 = i
+    if a[i] > a[index]:
+        index = i
 
-if index1 == 0:
-    index2 = 1
-else:
-    index2 = 0
+# swap the last number with the max number
+a[-1], a[index] = a[index], a[-1]
         
-for i in range(1, n):
-    if ((a[i] != a[index1]) and (a[i] > a[index2])):
-        index2 = i
-        
-result = a[index1] * a[index2]
+# reset index value
+index = 0
+
+# search the index of the max number in list excluding last number
+for i in range(1, len(a)-1):
+    if a[i] > a[index]:
+        index = i
+
+# swap the second last number with the second biggest 
+a[-2], a[index] = a[index], a[-2]
+
+# result is the sum of the last two values in the list
+result = a[-1] * a[-2]
+
 print(result)
