@@ -5,16 +5,22 @@ using std::vector;
 using std::cin;
 using std::cout;
 
-int MaxPairwiseProduct(const vector<int>& numbers) {
-	int result = 0;
+int64_t MaxPairwiseProdNaive(const vector<int>& numbers) {
+	/*initialize result*/
+	int64_t result = 0;
+	/*store size of vector*/
 	int n = numbers.size();
+	/*loop through the vector*/
 	for (int i = 0; i < n; ++i) {
 		for (int j = i + 1; j < n; ++j) {
-			if (numbers[i] * numbers[j] > result) {
-				result = numbers[i] * numbers[j];
+			/*compute the product at each iteration and compare with the stored result*/
+			if (((int64_t)(numbers[i])) * numbers[j] > result) {
+				/*store the new product if it is bigger than the old one*/
+				result = ((int64_t)(numbers[i])) * numbers[j];
 			}
 		}
 	}
+	/*retun the final value of result*/
 	return result;
 }
 
@@ -26,7 +32,7 @@ int main() {
 		cin >> numbers[i];
 	}
 
-	int result = MaxPairwiseProduct(numbers);
+	int64_t result = MaxPairwiseProdNaive(numbers);
 	cout << result << "\n";
 	system("PAUSE");
 	return 0;
