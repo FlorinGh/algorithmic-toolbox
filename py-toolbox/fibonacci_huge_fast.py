@@ -1,19 +1,25 @@
 # Uses python3
 import sys
 
-def get_fibonacci_huge(n, m):
-    if n <= 1:
-        return n
+def find_period(m):
+    period = []
+    a, b = 0, 1
+    period.append(a)
+    period.append(b)
+    for i in range(2, m*m):
+        a = b
+        b = (a + period[i-2]) % m
+        if a == 0 and b == 1:
+            return period[0:-1]
+        period.append(b)
+    return period[0:-1]
 
-    previous = 0
-    current  = 1
-
-    for _ in range(n - 1):
-        previous, current = current, previous + current
-
-    return current % m
+def fib_huge(n, m):
+    period = find_period(m)
+    index = n % len(period)
+    return period[index]
 
 if __name__ == '__main__':
     input = sys.stdin.read();
     n, m = map(int, input.split())
-    print(get_fibonacci_huge(n, m))
+    print(fib_huge(n, m))
